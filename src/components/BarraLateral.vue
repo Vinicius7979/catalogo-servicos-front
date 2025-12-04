@@ -12,7 +12,7 @@ import { RouterLink } from 'vue-router';
             <RouterLink to="/banco-de-dados" class="px-6 py-3 w-full text-black no-underline block rounded-[6px] mb-2 transition-colors duration-200 hover:bg-neutral-400">Banco de Dados</RouterLink>
             <a href="#" class="px-6 py-3 w-full text-black no-underline block rounded-[6px] mb-2 transition-colors duration-200 hover:bg-neutral-400">Servidor Aplicação</a>
             <RouterLink to="/area-de-negocio" class="px-6 py-3 w-full text-black no-underline block rounded-[6px] mb-2 transition-colors duration-200 hover:bg-neutral-400">Área de Negócio</RouterLink>
-            <a href="#" class="px-6 py-3 w-full text-black no-underline block rounded-[6px] mb-2 transition-colors duration-200 hover:bg-neutral-400">Segmento</a>
+            <RouterLink to="/segmento" class="px-6 py-3 w-full text-black no-underline block rounded-[6px] mb-2 transition-colors duration-200 hover:bg-neutral-400">Segmento</RouterLink>
             <a href="#" class="px-6 py-3 w-full text-black no-underline block rounded-[6px] mb-2 transition-colors duration-200 hover:bg-neutral-400">Deploy</a>
             <a href="#" class="px-6 py-3 w-full text-black no-underline block rounded-[6px] mb-2 transition-colors duration-200 hover:bg-neutral-400">Sistema</a>
             <a href="#" class="px-6 py-3 w-full text-black no-underline block rounded-[6px] mb-2 transition-colors duration-200 hover:bg-neutral-400">Serviço</a>
