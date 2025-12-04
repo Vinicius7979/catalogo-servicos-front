@@ -7,7 +7,7 @@ import DefaultLayout from '@/layouts/DefaultLayout.vue';
 
 <template>
     <DefaultLayout>
-        <div>
+        <div class="flex min-h-[calc(100vh-120px)]">
             <BarraLateral />
             <AreaDeNegocioPage />
         </div>
