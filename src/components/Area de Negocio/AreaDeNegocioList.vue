@@ -20,12 +20,12 @@ defineProps<{
                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-neutral-800">{{ area.descricao }}</td>
                 <td class="px-6 py-4 whitespace-nowrap text-sm text-neutral-700">{{ area.impacto }}</td>
                 <td class="px-6 py-4 whitespace-nowrap text-sm">
-                <button 
-                    @click="$emit('editar', area)"
-                    class="inline-flex items-center px-3 py-1 rounded-md text-sm font-medium bg-blue-50 text-blue-700 border border-blue-200 hover:bg-blue-100 transition"
-                >
-                    Editar
-                </button>
+                    <button 
+                        @click="$emit('editar', area)"
+                        class="inline-flex items-center px-3 py-1 rounded-md text-sm font-medium bg-blue-50 text-blue-700 border border-blue-200 hover:bg-blue-100 transition"
+                    >
+                        Editar
+                    </button>
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap text-sm">
                     <button 

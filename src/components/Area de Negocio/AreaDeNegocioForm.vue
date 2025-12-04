@@ -45,12 +45,16 @@ function fechar(){
                 />
 
                 <label class="block text-sm font-medium text-neutral-700 mb-2">Impacto</label>
-                <input 
+                <select 
                     v-model="impacto" 
-                    type="text"
                     class="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" 
-                    required 
-                />
+                    required
+                >
+                    <option disabled value="">--Selecione--</option>
+                    <option value="ALTO">Alto</option>
+                    <option value="MEDIO">Médio</option>
+                    <option value="BAIXO">Baixo</option>
+                </select> 
             </div>
 
             <div class="flex justify-end mt-6 gap-3">
