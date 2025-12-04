@@ -12,7 +12,7 @@ const emit = defineEmits<{
 
 async function salvar() {
   try {
-    await AreaDeNegocioService.salvar({ descricao: descricao.value, versao: impacto.value })
+    await AreaDeNegocioService.salvar({ descricao: descricao.value, impacto: impacto.value })
     emit('save')
     descricao.value = ''
     impacto.value = ''
@@ -33,10 +33,10 @@ function fechar(){
     <div class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
         <div class="bg-white rounded-2xl shadow-2xl p-6 w-[90%] max-w-md">
             <h2 class="text-2xl font-bold text-center mb-4 text-gray-800">
-            Cadastrar Linguagem
+            Cadastrar Área de Negócio
             </h2>
             <div class="flex flex-col gap-4">
-                <label class="block text-sm font-medium text-neutral-700 mb-2">Linguagem</label>
+                <label class="block text-sm font-medium text-neutral-700 mb-2">Área de Négocio</label>
                 <input 
                     v-model="descricao" 
                     type="text" 
