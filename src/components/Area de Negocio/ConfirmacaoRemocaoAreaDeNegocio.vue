@@ -11,7 +11,7 @@ const emit = defineEmits<{
 <template>
     <div class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
         <div class="bg-white rounded-xl shadow-lg p-6 w-[90%] max-w-sm text-center">
-            <h2 class="text-lg font-semibold text-gray-800 mb-4">Deseja remover essa Área de Négocio?</h2>
+            <h2 class="text-lg font-semibold text-gray-800 mb-4">Deseja remover essa Área de Negócio?</h2>
         
             <div class="flex justify-center gap-4">
                 <button

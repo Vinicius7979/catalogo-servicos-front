@@ -36,7 +36,7 @@ function fechar(){
             Cadastrar Área de Negócio
             </h2>
             <div class="flex flex-col gap-4">
-                <label class="block text-sm font-medium text-neutral-700 mb-2">Área de Négocio</label>
+                <label class="block text-sm font-medium text-neutral-700 mb-2">Área de Negócio</label>
                 <input 
                     v-model="descricao" 
                     type="text" 

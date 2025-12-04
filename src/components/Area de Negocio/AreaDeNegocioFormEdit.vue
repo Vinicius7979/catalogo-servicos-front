@@ -10,7 +10,7 @@ const emit = defineEmits<{
 }>()
 
 const descricao = ref('')
-const versao = ref('')
+const impacto = ref('')
 
 watch(() => props.areaDeNegocio, (novo) => {
   if (novo) {
@@ -18,7 +18,7 @@ watch(() => props.areaDeNegocio, (novo) => {
     impacto.value = novo.impacto ?? ''
   } else {
     descricao.value = ''
-    versao.value = ''
+    impacto.value = ''
   }
 }, { immediate: true })
 
@@ -39,6 +39,47 @@ function fechar(){
 }
 </script>
 
-<template></template>
+<template>
+    <div class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+      <div class="bg-white rounded-2xl shadow-2xl p-6 w-[90%] max-w-md">
+        <h2 class="text-2xl font-bold text-center mb-4 text-gray-800">
+          Editar Área de Negócio
+        </h2>
+        <div class="flex flex-col gap-4">
+          <label class="block text-sm font-medium text-neutral-700 mb-2">área de Negócio</label>
+          <input 
+            v-model="descricao" 
+            type="text" 
+            class="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" 
+            required 
+          />
+
+          <label class="block text-sm font-medium text-neutral-700 mb-2">Impacto</label>
+          <input 
+            v-model="impacto" 
+            type="text" 
+            class="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" 
+            required 
+          />
+        </div>
+
+        <div class="flex justify-end mt-6 gap-3">
+          <button
+            @click="fechar"
+            class="px-4 py-2 rounded-lg bg-gray-300 hover:bg-gray-400 transition"
+          >
+            Cancelar
+          </button>
+
+          <button 
+            @click="salvarEdicao"
+            class="px-4 py-2 rounded-lg bg-green-600 text-white hover:bg-green-700 transition"
+          >
+            Salvar
+          </button>
+        </div>  
+      </div>
+    </div>
+</template>
 
 <style scoped></style>
