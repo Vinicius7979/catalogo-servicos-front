@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import { AreaDeNegocioService } from '@/services/AreaDeNegocioService'
 
 const descricao = ref('')
 const impacto = ref('')
