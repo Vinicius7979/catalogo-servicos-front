@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import BarraLateral from '@/components/BarraLateral.vue';
-import DeployPage from '@/components/Deploy/DeployPage.vue';
+import ServidorAplicacaoPage from '@/components/ServidorAplicacao/ServidorAplicacaoPage.vue';
 import DefaultLayout from '@/layouts/DefaultLayout.vue';
 
 </script>
@@ -9,7 +9,7 @@ import DefaultLayout from '@/layouts/DefaultLayout.vue';
     <DefaultLayout>
         <div class="flex min-h-[calc(100vh-120px)]">
             <BarraLateral />
-            <DeployPage />
+            <ServidorAplicacaoPage />
         </div>
     </DefaultLayout>
 </template>
