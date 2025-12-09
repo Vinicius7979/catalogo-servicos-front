@@ -21,7 +21,7 @@ const emit = defineEmits<{
 
 async function salvar() {
   try {
-    await ServidorAplicacaoService.salvar({ descricao: descricao.value, versao: versao.value, ip: ip.value, ambiente: ambiente.value, tipoServidor: tipoServidor.value, orquestrador: orquestrador.value, url: url.value, porta: porta.value, ipProxy: ipProxy.value, hostName: hostName.value, distribuicao: distribuicao.value, })
+    await ServidorAplicacaoService.salvar({ descricao: descricao.value, versao: versao.value, ip: ip.value, ambiente: ambiente.value, tipoServidor: tipoServidor.value, orquestrador: orquestrador.value, url: url.value, porta: porta.value, ipProxy: ipProxy.value, hostName: hostName.value, distribuicao: distribuicao.value })
     emit('save')
     descricao.value = ''
     versao.value = ''
