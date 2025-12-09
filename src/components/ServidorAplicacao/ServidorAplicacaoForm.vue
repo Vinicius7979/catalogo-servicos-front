@@ -52,7 +52,9 @@ function fechar(){
         <h2 class="text-2xl font-bold text-center mb-4 text-gray-800">
           Cadastrar Servidor Aplicação
         </h2>
-        <div class="flex flex-col gap-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+          <div class="flex flex-col p-2">
           <label class="block text-sm font-medium text-neutral-700 mb-2">Servidor Aplicação</label>
           <input 
             v-model="descricao" 
@@ -60,7 +62,9 @@ function fechar(){
             class="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" 
             required 
           />
+          </div>
 
+          <div class="flex flex-col p-2">
           <label class="block text-sm font-medium text-neutral-700 mb-2">Versão</label>
           <input 
             v-model="versao" 
@@ -68,7 +72,9 @@ function fechar(){
             class="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" 
             required 
           />
+          </div>
 
+          <div class="flex flex-col p-2">
           <label class="block text-sm font-medium text-neutral-700 mb-2">Ip</label>
           <input 
             v-model="ip" 
@@ -76,7 +82,9 @@ function fechar(){
             class="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" 
             required 
           />
+          </div>
 
+          <div class="flex flex-col p-2">
           <label class="block text-sm font-medium text-neutral-700 mb-2">Ambiente</label>
                 <select 
                     v-model="ambiente" 
@@ -89,7 +97,9 @@ function fechar(){
                     <option value="TESTE">Teste</option>
                     <option value="PRODUCAO">Produção</option>
                 </select> 
-          
+          </div>
+
+        <div class="flex flex-col p-2">
           <label class="block text-sm font-medium text-neutral-700 mb-2">Tipo Servidor</label>
                 <select 
                     v-model="tipoServidor" 
@@ -102,7 +112,9 @@ function fechar(){
                     <option value="NGIX">NGIX</option>
                     <option value="JBOSS">JBoss</option>
                 </select>
+        </div>
 
+        <div class="flex flex-col p-2">
           <label class="block text-sm font-medium text-neutral-700 mb-2">Orquestrador</label>
           <input 
             v-model="orquestrador" 
@@ -110,7 +122,10 @@ function fechar(){
             class="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" 
             required 
           />
+        </div>
 
+
+        <div class="flex flex-col p-2">
           <label class="block text-sm font-medium text-neutral-700 mb-2">Url</label>
           <input 
             v-model="url" 
@@ -118,7 +133,9 @@ function fechar(){
             class="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" 
             required 
           />
+        </div>
 
+        <div class="flex flex-col p-2">
           <label class="block text-sm font-medium text-neutral-700 mb-2">Porta</label>
             <input 
                 v-model="porta" 
@@ -126,7 +143,9 @@ function fechar(){
                 class="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" 
                 required 
             />
+        </div>
 
+        <div class="flex flex-col p-2">
         <label class="block text-sm font-medium text-neutral-700 mb-2">IpProxy</label>
           <input 
             v-model="ipProxy" 
@@ -134,7 +153,9 @@ function fechar(){
             class="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" 
             required 
           />
+        </div>
 
+        <div class="flex flex-col p-2">
           <label class="block text-sm font-medium text-neutral-700 mb-2">HostName</label>
           <input 
             v-model="hostName" 
@@ -142,7 +163,9 @@ function fechar(){
             class="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" 
             required 
           />
+        </div>
 
+        <div class="flex flex-col p-2">
           <label class="block text-sm font-medium text-neutral-700 mb-2">Distribuicao</label>
           <input 
             v-model="distribuicao" 
@@ -151,6 +174,8 @@ function fechar(){
             required 
           />
         </div>
+
+      </div>
 
         <div class="flex justify-end mt-6 gap-3">
           <button
