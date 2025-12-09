@@ -10,12 +10,12 @@ import { RouterLink } from 'vue-router';
             <RouterLink to="/tecnologia" class="px-6 py-3 w-full text-black no-underline block rounded-[6px] mb-2 transition-colors duration-200 hover:bg-neutral-400">Tecnologia</RouterLink>
             <RouterLink to="/setor" class="px-6 py-3 w-full text-black no-underline block rounded-[6px] mb-2 transition-colors duration-200 hover:bg-neutral-400">Setor</RouterLink>
             <RouterLink to="/banco-de-dados" class="px-6 py-3 w-full text-black no-underline block rounded-[6px] mb-2 transition-colors duration-200 hover:bg-neutral-400">Banco de Dados</RouterLink>
-            <a href="#" class="px-6 py-3 w-full text-black no-underline block rounded-[6px] mb-2 transition-colors duration-200 hover:bg-neutral-400">Servidor Aplicação</a>
+            <RouterLink to="/servidor-aplicacao" class="px-6 py-3 w-full text-black no-underline block rounded-[6px] mb-2 transition-colors duration-200 hover:bg-neutral-400">Servidor Aplicação</RouterLink>
             <RouterLink to="/area-de-negocio" class="px-6 py-3 w-full text-black no-underline block rounded-[6px] mb-2 transition-colors duration-200 hover:bg-neutral-400">Área de Negócio</RouterLink>
             <RouterLink to="/segmento" class="px-6 py-3 w-full text-black no-underline block rounded-[6px] mb-2 transition-colors duration-200 hover:bg-neutral-400">Segmento</RouterLink>
-            <a href="#" class="px-6 py-3 w-full text-black no-underline block rounded-[6px] mb-2 transition-colors duration-200 hover:bg-neutral-400">Deploy</a>
-            <a href="#" class="px-6 py-3 w-full text-black no-underline block rounded-[6px] mb-2 transition-colors duration-200 hover:bg-neutral-400">Sistema</a>
-            <a href="#" class="px-6 py-3 w-full text-black no-underline block rounded-[6px] mb-2 transition-colors duration-200 hover:bg-neutral-400">Serviço</a>
+            <RouterLink to="#" class="px-6 py-3 w-full text-black no-underline block rounded-[6px] mb-2 transition-colors duration-200 hover:bg-neutral-400">Deploy</RouterLink>
+            <RouterLink to="#" class="px-6 py-3 w-full text-black no-underline block rounded-[6px] mb-2 transition-colors duration-200 hover:bg-neutral-400">Sistema</RouterLink>
+            <RouterLink to="#" class="px-6 py-3 w-full text-black no-underline block rounded-[6px] mb-2 transition-colors duration-200 hover:bg-neutral-400">Serviço</RouterLink>
         </nav>
     </aside>
 </template>
