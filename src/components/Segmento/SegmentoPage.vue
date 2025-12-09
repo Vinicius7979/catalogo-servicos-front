@@ -1,11 +1,11 @@
-<script lang="ts">
+<script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import { SegmentoService } from '@/services/SegmentoService'
-import SegmentoList from '@/components/Segmentos/SegmentoList.vue'
-import SegmentoForm from '@/components/Segmentos/SegmentoForm.vue'
-import SegmentoFormEdit from '@/components/Segmentos/SegmentoFormEdit.vue'
+import SegmentoList from '@/components/Segmento/SegmentoList.vue'
+import SegmentoForm from '@/components/Segmento/SegmentoForm.vue'
 import ConfirmacaoRemocaoSegmento from '@/components/Segmento/ConfirmacaoRemocaoSegmento.vue'
 import type { Segmento } from '@/types/SegmentoType'
+import SegmentoFormEdit from '@/components/Segmento/SegmentoFormEdit.vue'
 
 const segmentos = ref<Segmento[]>([])
 const loading = ref(true)
@@ -89,6 +89,66 @@ onMounted(() => {
 })
 </script>
 
-<template></template>
+<template>
+    <section class="flex-1 p-6">
+    <div class="mb-8">
+      <h1 class="text-2xl font-semibold text-neutral-800 mb-2">Segmentos</h1>
+    </div>
+
+    <SegmentoForm 
+      v-if="adicionarForm"
+      @close="adicionarForm = false"
+      @save="carregarSegmentos"
+    />
+
+    <SegmentoFormEdit
+      v-if="editarForm"
+      :segmento="segmentoSelecionada"
+      @close="fecharEditar"
+      @save="handleSaveEdit" 
+    />
+
+    <ConfirmacaoRemocaoSegmento
+      v-if="mostrarConfirmacaoRemocao"
+      @cancel="cancelarRemocao"
+      @confirm="confirmarRemocao"
+    />
+
+    <div 
+      v-if="erro"
+      class="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg text-red-700"
+    >
+      {{ erro }}
+    </div>
+
+    <div class="bg-white rounded-lg shadow-sm overflow-hidden">
+      <div class="p-6 border-b border-neutral-200">
+        <div class="flex items-center justify-between">
+          <h2 class="text-lg font-semibold text-neutral-800">Segmentos Cadastradas</h2>
+          <div class="ml-4">
+            <button
+              @click="adicionarForm = true"
+              class="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700"
+            >
+              Adicionar
+            </button>
+          </div>
+        </div>
+      </div>
+            
+      <div v-if="loading" class="p-6 text-center text-neutral-500">
+        <p>Carregando segmentos...</p>
+      </div>
+
+      <div v-else class="overflow-x-auto">
+          <SegmentoList 
+            :segmentos="segmentos"
+            @remover="abrirConfirmacaoRemocao"
+            @editar="abrirEditar"
+          />
+      </div>
+    </div>
+  </section>
+</template>
 
 <style scoped></style>
