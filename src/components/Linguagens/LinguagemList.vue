@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { defineProps } from 'vue'
 
 defineProps<{
   linguagens: { uuid: string; descricao: string; versao: string; ativo: boolean }[]
