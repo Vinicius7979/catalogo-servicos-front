@@ -1,3 +1,5 @@
+import type { Modulo } from '@/types/ModuloType'
+
 export interface Sistema {
     uuid: string;
     descricao: string;
@@ -11,5 +13,5 @@ export interface Sistema {
     areaDeNegocioUuid: string;
     // responsavel: Responsavel; // objeto que cria
     ativo: boolean;
-    // modulo: List<Modulo> // lista de objeto chamado modulo
+    modulo: Modulo[]; // lista de objeto
 }
