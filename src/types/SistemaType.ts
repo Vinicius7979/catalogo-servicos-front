@@ -9,7 +9,7 @@ export interface Sistema {
     segmentoUuid: string;
     setorUuid: string;
     areaDeNegocioUuid: string;
-    // responsavel: Responsavel; // objeto
+    // responsavel: Responsavel; // objeto que cria
     ativo: boolean;
-    // modulo: List<Modulo> // lista de objeto
+    // modulo: List<Modulo> // lista de objeto chamado modulo
 }
