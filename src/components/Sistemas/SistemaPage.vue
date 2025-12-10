@@ -1,5 +1,5 @@
 <script setup lang="ts">
-    import { ref, onMounted } from 'vue'
+import { ref, onMounted } from 'vue'
 import { SistemaService } from '@/services/SistemaService'
 import SistemaList from '@/components/Sistemas/SistemaList.vue'
 import SistemaForm from '@/components/Sistemas/SistemaForm.vue'
