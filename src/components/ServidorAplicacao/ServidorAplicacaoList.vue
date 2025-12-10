@@ -30,7 +30,7 @@ defineProps<{
         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-neutral-500 uppercase tracking-wider">Porta</th>
         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-neutral-500 uppercase tracking-wider">Ip Proxy</th>
         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-neutral-500 uppercase tracking-wider">HostName</th>
-        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-neutral-500 uppercase tracking-wider">Distribuicao</th>
+        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-neutral-500 uppercase tracking-wider">Distribuição</th>
       </tr>
     </thead>
     <tbody class="bg-white divide-y divide-neutral-100">
