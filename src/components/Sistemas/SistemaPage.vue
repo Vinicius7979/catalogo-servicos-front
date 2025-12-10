@@ -41,6 +41,8 @@ async function carregarSistemas() {
       segmentoUuid: it.segmentoUuid,
       setorUuid: it.setorUuid,
       areaDeNegocioUuid: it.areaDeNegocioUuid,
+      responsavel: it.responsavel,
+      modulo: it.modulo,
       ativo: it.ativo,
     }));
 
@@ -58,15 +60,15 @@ function abrirEditar(sis: Sistema) {
   editarForm.value = true
 }
 
-function fecharEditar() {
-  editarForm.value = false
-  sistemaSelecionado.value = null
-}
+// function fecharEditar() {
+//   editarForm.value = false
+//   sistemaSelecionado.value = null
+// }
 
-function handleSaveEdit() {
-  carregarSistemas()
-  fecharEditar()
-}
+// function handleSaveEdit() {
+//   carregarSistemas()
+//   fecharEditar()
+// }
 
 function abrirConfirmacaoRemocao(uuid: string) {
   uuidParaRemover.value = uuid
