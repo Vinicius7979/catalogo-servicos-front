@@ -128,7 +128,9 @@ onMounted(() => {
         <h2 class="text-2xl font-bold text-center mb-4 text-gray-800">
           Cadastrar Sistema
         </h2>
-        <div class="flex flex-col gap-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+          <div class="flex flex-col p-2">  
           <label class="block text-sm font-medium text-neutral-700 mb-2">Sistema</label>
           <input 
             v-model="descricao" 
@@ -136,7 +138,9 @@ onMounted(() => {
             class="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" 
             required 
           />
+          </div>
 
+          <div class="flex flex-col p-2">
           <label class="block text-sm font-medium text-neutral-700 mb-2">Versão</label>
           <input 
             v-model="versao" 
@@ -144,7 +148,9 @@ onMounted(() => {
             class="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" 
             required 
           />
+          </div>
 
+          <div class="flex flex-col p-2">
           <label class="block text-sm font-medium text-neutral-700 mb-2">Sigla</label>
           <input 
             v-model="sigla" 
@@ -152,7 +158,9 @@ onMounted(() => {
             class="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" 
             required 
           />
+          </div>
 
+          <div class="flex flex-col p-2">
           <label class="block text-sm font-medium text-neutral-700 mb-2">Url</label>
           <input 
             v-model="url" 
@@ -160,7 +168,9 @@ onMounted(() => {
             class="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" 
             required 
           />
+          </div>
 
+          <div class="flex flex-col p-2">
           <label class="block text-sm font-medium text-neutral-700 mb-2">Status</label>
                 <select 
                     v-model="status" 
@@ -173,7 +183,9 @@ onMounted(() => {
                     <option value="SOMENTE_CONSULTA">Somente Consulta</option>
                     <option value="DESATIVADO">Desativado</option>
                 </select> 
+            </div>
 
+          <div class="flex flex-col p-2">
           <label class="block text-sm font-medium text-neutral-700 mb-2">Autenticação</label>
                 <select 
                     v-model="autenticacao" 
@@ -186,24 +198,31 @@ onMounted(() => {
                     <option value="PROPRIA">Própria</option>
                     <option value="NENHUM">Nenhum</option>
                 </select> 
+          </div>
 
+          <div class="flex flex-col p-2">
           <label class="block text-sm font-medium text-neutral-700 mb-2">Segmento:</label>
           <select name="segmentos" v-model="segmentoSelecionado" class="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
             <option :value="null">--Selecione--</option>
             <option v-for="(seg, index) in segmentos" :key="seg.uuid ?? (seg.descricao + '-' + index)" :value="seg.uuid">{{ seg.descricao }}</option>
           </select>
+          </div>
 
+          <div class="flex flex-col p-2">
           <label class="block text-sm font-medium text-neutral-700 mb-2">Setor:</label>
           <select name="setores" v-model="setorSelecionado" class="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
             <option :value="null">--Selecione--</option>
             <option v-for="(set, index) in setores" :key="set.uuid ?? (set.descricao + '-' + index)" :value="set.uuid">{{ set.descricao }}</option>
           </select>
+          </div>
 
+          <div class="flex flex-col p-2">
           <label class="block text-sm font-medium text-neutral-700 mb-2">Area de Negócio:</label>
           <select name="areasDeNegocio" v-model="areaDeNegocioSelecionado" class="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
             <option :value="null">--Selecione--</option>
             <option v-for="(area, index) in areasDeNegocio" :key="area.uuid ?? (area.descricao + '-' + index)" :value="area.uuid">{{ area.descricao }}</option>
           </select>
+          </div>
 
         </div>
 

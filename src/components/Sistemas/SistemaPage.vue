@@ -47,7 +47,7 @@ async function carregarSistemas() {
   } catch (error) {
     console.error('Erro ao carregar sistemas:', error)
     erro.value = 'Erro ao carregar sistemas.'
-    sistemas.value = [] // deixa a lista vazia pra evitar dados antigos ou invalidos, coisas do tipo.
+    sistemas.value = []
   } finally {
     loading.value = false
   }
