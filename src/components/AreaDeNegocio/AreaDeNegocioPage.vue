@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import { AreaDeNegocioService } from '@/services/AreaDeNegocioService'
-import AreaDeNegocioList from '@/components/Area de Negocio/AreaDeNegocioList.vue'
-import AreaDeNegocioForm from '@/components/Area de Negocio/AreaDeNegocioForm.vue'
-import AreaDeNegocioFormEdit from '@/components/Area de Negocio/AreaDeNegocioFormEdit.vue'
-import ConfirmacaoRemocaoAreaDeNegocio from '@/components/Area de Negocio/ConfirmacaoRemocaoAreaDeNegocio.vue'
+import AreaDeNegocioList from '@/components/AreaDeNegocio/AreaDeNegocioList.vue'
+import AreaDeNegocioForm from '@/components/AreaDeNegocio/AreaDeNegocioForm.vue'
+import AreaDeNegocioFormEdit from '@/components/AreaDeNegocio/AreaDeNegocioFormEdit.vue'
+import ConfirmacaoRemocaoAreaDeNegocio from '@/components/AreaDeNegocio/ConfirmacaoRemocaoAreaDeNegocio.vue'
 import type { AreaDeNegocio } from '@/types/AreaDeNegocioType'
 
 const areasDeNegocio = ref<AreaDeNegocio[]>([])

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import AreaDeNegocioPage from '@/components/Area de Negocio/AreaDeNegocioPage.vue';
+import AreaDeNegocioPage from '@/components/AreaDeNegocio/AreaDeNegocioPage.vue';
 import BarraLateral from '@/components/BarraLateral.vue';
 import DefaultLayout from '@/layouts/DefaultLayout.vue';
 
