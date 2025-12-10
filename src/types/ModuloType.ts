@@ -1,3 +1,5 @@
+import type { Armazenamento } from '@/types/ArmazenamentoType'
+
 export interface Modulo {
     uuid: string;
     descricao: string;
@@ -5,7 +7,7 @@ export interface Modulo {
     url: string;
     porta: number;
     gitUrl: string;
-    // List<ListaArmazenamentoDTO> listaArmazenamento // lista de objeto
+    armazenamento: Armazenamento[]; // lista de objeto
     tipoTecnologia: string;  //enum
     tecnologiaUuid: string;
     ativo: boolean;

@@ -1,7 +1,213 @@
 <script setup lang="ts">
+import { ref, onMounted } from 'vue'
+//import { ModuloService } from '@/services/ModuloService'
+import { ArmazenamentoService } from '@/services/ArmazenamentoService'
+import type { Armazenamento } from '@/types/ArmazenamentoType'
 
+const descricao = ref('')
+const documentacaoUrl = ref('')
+const url = ref('')
+const porta = ref('')
+const gitUrl = ref('')
+const tipoTecnologia = ref('')
+const tecnologiaSelecionada = ref('')
+const armazenamentoSelecionado = ref<string | null>(null)
+const armazenamentos = ref<Armazenamento[]>([])
+import { TecnologiaService } from '@/services/TecnologiaService'
+import type { Tecnologia } from '@/types/TecnologiaType' 
+
+const tecnologias = ref<Tecnologia[]>([])
+
+const emit = defineEmits<{
+  (e: 'close'): void
+  (e: 'save'): void
+}>()
+
+async function listarArmazenamentos() {
+  try {
+    const { data } = await ArmazenamentoService.listar()
+    let itemsArray: Armazenamento[] = data.dados
+
+    if (Array.isArray(itemsArray) && itemsArray.length > 0 && Array.isArray(itemsArray[0])) {
+      itemsArray = itemsArray.flat()
+    }
+
+    armazenamentos.value = itemsArray.map(it => ({
+      uuid: it.uuid,
+      schema: it.schema,
+      dblink: it.dblink,
+      bancoDeDadosUuid: it.bancoDeDadosUuid,
+      ativo: it.ativo
+    }))
+  } catch (error) {
+    console.error('Erro ao listar armazenamentos:', error)
+    alert('Erro ao listar armazenamentos.')
+  }
+}
+
+async function listarTecnologias() {
+  try {
+    const { data } = await TecnologiaService.listar()
+    let items = data.dados
+
+    if (Array.isArray(items) && items.length > 0 && Array.isArray(items[0])) {
+      items = items.flat()
+    }
+
+    tecnologias.value = items.map((tec: Tecnologia) => ({
+      uuid: tec.uuid,
+      descricao: tec.descricao,
+      ativo: tec.ativo
+    }))
+  } catch (err) {
+    console.error('Erro ao listar tecnologias:', err)
+    alert('Erro ao listar tecnologias.')
+  }
+}
+
+async function salvar() {
+  try {
+    
+    fechar()
+  } catch (error) {
+    console.error('Erro ao salvar módulo:', error)
+    alert('Erro ao salvar módulo.')
+  }
+}
+
+function fechar() {
+  emit('close')
+}
+
+onMounted(() => {
+  listarArmazenamentos()
+})
+
+onMounted(() => {
+  listarTecnologias()
+})
 </script>
 
-<template></template>
+<template>
+  <div class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+    <div class="bg-white rounded-2xl shadow-2xl p-6 w-[90%] max-w-md">
+
+      <h2 class="text-2xl font-bold text-center mb-4 text-gray-800">
+        Cadastrar Módulo
+      </h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+        <div class="flex flex-col p-2">
+          <label class="block text-sm font-medium mb-2">Descrição</label>
+          <input
+            v-model="descricao"
+            type="text"
+            class="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            required
+          />
+        </div>
+
+        <div class="flex flex-col p-2">
+          <label class="block text-sm font-medium mb-2">Documentação URL</label>
+          <input
+            v-model="documentacaoUrl"
+            type="text"
+            class="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+        </div>
+
+        <div class="flex flex-col p-2">
+          <label class="block text-sm font-medium mb-2">URL</label>
+          <input
+            v-model="url"
+            type="text"
+            class="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+        </div>
+
+        <div class="flex flex-col p-2">
+          <label class="block text-sm font-medium mb-2">Porta</label>
+          <input
+            v-model="porta"
+            type="number"
+            min="0"
+            class="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+        </div>
+
+        <div class="flex flex-col p-2">
+          <label class="block text-sm font-medium mb-2">Git URL</label>
+          <input
+            v-model="gitUrl"
+            type="text"
+            class="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+        </div>
+
+        <div class="flex flex-col p-2">
+          <label class="block text-sm font-medium mb-2">Tipo de Tecnologia</label>
+          <select
+            v-model="tipoTecnologia"
+            class="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          >
+            <option disabled value="">--Selecione--</option>
+            <option value="BACKEND">Backend</option>
+            <option value="FRONTEND">Frontend</option>
+            <option value="MONOLITO">Monolito</option>
+          </select>
+        </div>
+
+        <div class="flex flex-col p-2">
+          <label class="block text-sm font-medium mb-2">Tecnologia</label>
+          <select
+            v-model="tecnologiaSelecionada"
+            class="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          >
+            <option :value="null">--Selecione--</option>
+            <option v-for="tec in tecnologias" :key="tec.uuid" :value="tec.uuid">
+              {{ tec.descricao }}
+            </option>
+          </select>
+        </div>
+
+        <div class="flex flex-col p-2 md:col-span-2">
+          <label class="block text-sm font-medium mb-2">Armazenamentos</label>
+          <select
+            v-model="armazenamentoSelecionado"
+            multiple
+            class="border border-gray-300 rounded-lg px-4 py-2 h-28 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          >
+            <option
+              v-for="armaz in armazenamentos"
+              :key="armaz.uuid"
+              :value="armaz.uuid"
+            >
+              {{ armaz.schema }}
+            </option>
+          </select>
+        </div>
+
+      </div>
+
+      <div class="flex justify-end mt-6 gap-3">
+        <button
+          @click="fechar"
+          class="px-4 py-2 rounded-lg bg-gray-300 hover:bg-gray-400 transition"
+        >
+          Cancelar
+        </button>
+
+        <button
+          @click="salvar"
+          class="px-4 py-2 rounded-lg bg-green-500 hover:bg-green-600 text-white transition"
+        >
+          Salvar
+        </button>
+      </div>
+
+    </div>
+  </div>
+</template>
 
 <style scoped></style>
