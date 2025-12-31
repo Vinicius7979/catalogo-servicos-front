@@ -234,6 +234,12 @@ onMounted(() => {
         <div class="flex justify-between items-center mb-4">
           <h2 class="text-lg font-semibold text-gray-800">Módulos do Sistema</h2>
 
+          <ModuloForm 
+            v-if="adicionarModulo"
+            @save="listarModulos"
+            @close="adicionarModulo = false"
+          />
+
           <button type="button"
             @click="adicionarModulo = true"
             class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">

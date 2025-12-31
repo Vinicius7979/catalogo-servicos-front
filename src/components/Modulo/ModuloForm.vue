@@ -1,26 +1,27 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
-//import { ModuloService } from '@/services/ModuloService'
+import { ModuloService } from '@/services/ModuloService'
 import { ArmazenamentoService } from '@/services/ArmazenamentoService'
 import type { Armazenamento } from '@/types/ArmazenamentoType'
 
 const descricao = ref('')
 const documentacaoUrl = ref('')
 const url = ref('')
-const porta = ref('')
+const porta = ref<number | null>(null)
 const gitUrl = ref('')
 const tipoTecnologia = ref('')
-const tecnologiaSelecionada = ref('')
+const tecnologiaSelecionada = ref<string | null>(null)
 const armazenamentoSelecionado = ref<string | null>(null)
 const armazenamentos = ref<Armazenamento[]>([])
 import { TecnologiaService } from '@/services/TecnologiaService'
 import type { Tecnologia } from '@/types/TecnologiaType' 
+import type { Modulo } from '@/types/ModuloType'
 
 const tecnologias = ref<Tecnologia[]>([])
 
 const emit = defineEmits<{
+  (e: 'save', modulo: Modulo): void
   (e: 'close'): void
-  (e: 'save'): void
 }>()
 
 async function listarArmazenamentos() {
@@ -66,13 +67,20 @@ async function listarTecnologias() {
 }
 
 async function salvar() {
-  try {
-    
-    fechar()
-  } catch (error) {
-    console.error('Erro ao salvar módulo:', error)
-    alert('Erro ao salvar módulo.')
+  const modulo: Modulo = {
+    uuid: '',
+    descricao: descricao.value,
+    documentacaoUrl: documentacaoUrl.value,
+    url: url.value,
+    porta: porta.value ?? 0,
+    gitUrl: gitUrl.value,
+    armazenamento: [],
+    tipoTecnologia: tipoTecnologia.value,
+    tecnologiaUuid: tecnologiaSelecionada.value ?? '',
+    ativo: true
   }
+
+  emit('save', modulo)
 }
 
 function fechar() {
