@@ -8,6 +8,7 @@ import type { AreaDeNegocio } from '@/types/AreaDeNegocioType'
 import { SetorService } from '@/services/SetorService'
 import { AreaDeNegocioService } from '@/services/AreaDeNegocioService'
 import type { Modulo } from '@/types/ModuloType'
+import ModuloForm from '../Modulo/ModuloForm.vue'
 
 const descricao = ref('')
 const versao = ref('')
@@ -22,12 +23,18 @@ const segmentos = ref<Segmento[]>([])
 const setores = ref<Setor[]>([])
 const areasDeNegocio = ref<AreaDeNegocio[]>([])
 
+const adicionarModulo = ref(false)
 const modulos = ref<Modulo[]>([])
 
 const emit = defineEmits<{
   (e: 'close'): void
   (e: 'save'): void
 }>()
+
+function listarModulos(modulo: Modulo){
+  modulos.value.push(modulo)
+  adicionarModulo.value = false
+}
 
 async function listarSegmentos(){
   try {
@@ -228,6 +235,7 @@ onMounted(() => {
           <h2 class="text-lg font-semibold text-gray-800">Módulos do Sistema</h2>
 
           <button type="button"
+            @click="adicionarModulo = true"
             class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
             Adicionar módulo
           </button>
