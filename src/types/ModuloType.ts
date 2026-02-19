@@ -7,7 +7,7 @@ export interface Modulo {
     url: string;
     porta: number;
     gitUrl: string;
-    armazenamento: Armazenamento[]; // lista de objeto
+    armazenamento: string[]; // lista de objeto
     tipoTecnologia: string;  //enum
     tecnologiaUuid: string;
     ativo: boolean;

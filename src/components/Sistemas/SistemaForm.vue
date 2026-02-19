@@ -8,7 +8,7 @@ import type { AreaDeNegocio } from '@/types/AreaDeNegocioType'
 import { SetorService } from '@/services/SetorService'
 import { AreaDeNegocioService } from '@/services/AreaDeNegocioService'
 import type { Modulo } from '@/types/ModuloType'
-import ModuloForm from '../Modulo/ModuloForm.vue'
+import ModuloForm from '@/components/Modulo/ModuloForm.vue'
 
 const descricao = ref('')
 const versao = ref('')

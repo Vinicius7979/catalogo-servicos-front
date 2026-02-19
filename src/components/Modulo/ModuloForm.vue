@@ -3,6 +3,10 @@ import { ref, onMounted } from 'vue'
 import { ModuloService } from '@/services/ModuloService'
 import { ArmazenamentoService } from '@/services/ArmazenamentoService'
 import type { Armazenamento } from '@/types/ArmazenamentoType'
+import { TecnologiaService } from '@/services/TecnologiaService'
+import type { Tecnologia } from '@/types/TecnologiaType' 
+import type { Modulo } from '@/types/ModuloType'
+import ArmazenamentoForm from '@/components/Armazenamento/ArmazenamentoForm.vue'
 
 const descricao = ref('')
 const documentacaoUrl = ref('')
@@ -11,18 +15,29 @@ const porta = ref<number | null>(null)
 const gitUrl = ref('')
 const tipoTecnologia = ref('')
 const tecnologiaSelecionada = ref<string | null>(null)
-const armazenamentoSelecionado = ref<string | null>(null)
+const armazenamentoSelecionado = ref<string[]>([])
 const armazenamentos = ref<Armazenamento[]>([])
-import { TecnologiaService } from '@/services/TecnologiaService'
-import type { Tecnologia } from '@/types/TecnologiaType' 
-import type { Modulo } from '@/types/ModuloType'
-
 const tecnologias = ref<Tecnologia[]>([])
+const mostrarArmazenamentoForm = ref(false)
 
 const emit = defineEmits<{
   (e: 'save', modulo: Modulo): void
   (e: 'close'): void
 }>()
+
+function adicionarArmazenamento(novo: Armazenamento) {
+  armazenamentos.value.push(novo)
+
+  // se quiser já selecionar automaticamente
+  armazenamentoSelecionado.value = [
+    ...(Array.isArray(armazenamentoSelecionado.value)
+      ? armazenamentoSelecionado.value
+      : []),
+    novo.uuid
+  ]
+
+  mostrarArmazenamentoForm.value = false
+}
 
 async function listarArmazenamentos() {
   try {
@@ -74,7 +89,7 @@ async function salvar() {
     url: url.value,
     porta: porta.value ?? 0,
     gitUrl: gitUrl.value,
-    armazenamento: [],
+    armazenamento: armazenamentoSelecionado.value,
     tipoTecnologia: tipoTecnologia.value,
     tecnologiaUuid: tecnologiaSelecionada.value ?? '',
     ativo: true
@@ -181,6 +196,21 @@ onMounted(() => {
 
         <div class="flex flex-col p-2 md:col-span-2">
           <label class="block text-sm font-medium mb-2">Armazenamentos</label>
+
+          <ArmazenamentoForm 
+            v-if="mostrarArmazenamentoForm"
+            @save="adicionarArmazenamento"
+            @close="mostrarArmazenamentoForm = false"
+          />
+
+          <button
+              type="button"
+              @click="mostrarArmazenamentoForm = true"
+              class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+            >
+              Adicionar Armazenamento
+            </button>
+
           <select
             v-model="armazenamentoSelecionado"
             multiple
@@ -194,6 +224,7 @@ onMounted(() => {
               {{ armaz.schema }}
             </option>
           </select>
+          
         </div>
 
       </div>
