@@ -211,19 +211,22 @@ onMounted(() => {
               Adicionar Armazenamento
             </button>
 
-          <select
-            v-model="armazenamentoSelecionado"
-            multiple
-            class="border border-gray-300 rounded-lg px-4 py-2 h-28 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          >
-            <option
-              v-for="armaz in armazenamentos"
-              :key="armaz.uuid"
-              :value="armaz.uuid"
-            >
-              {{ armaz.schema }}
-            </option>
-          </select>
+        <div v-if="armazenamentos.length === 0" class="text-sm text-gray-500 italic">
+          Nenhum armazenamento adicionado.
+        </div>
+
+        <div v-else class="space-y-3">
+          <div v-for="(armazenamento, index) in armazenamentos" :key="index"
+            class="flex justify-between items-center border rounded-lg p-4">
+            <div>
+              <p class="font-medium">{{ armazenamento.schema }}</p>
+            </div>
+
+            <button type="button" class="text-red-600 hover:text-red-800">
+              Remover
+            </button>
+          </div>
+        </div>
           
         </div>
 
