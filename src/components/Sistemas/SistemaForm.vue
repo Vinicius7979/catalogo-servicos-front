@@ -96,18 +96,51 @@ async function listarAreasDeNegocio(){
 
 async function salvar() {
   try {
-    await SistemaService.salvar({ descricao: descricao.value, versao: versao.value, sigla: sigla.value, url: url.value, status: status.value, autenticacao: autenticacao.value, segmentoUuid: segmentoSelecionado.value, setorUuid: setorSelecionado.value, areaDeNegocioUuid: areaDeNegocioSelecionado.value, })
+    const sistemaPayload = {
+      descricao: descricao.value,
+      versao: versao.value,
+      sigla: sigla.value,
+      url: url.value,
+      status: status.value,
+      autenticacao: autenticacao.value,
+      segmentoUuid: segmentoSelecionado.value,
+      setorUuid: setorSelecionado.value,
+      areaDeNegocioUuid: areaDeNegocioSelecionado.value,
+
+      modulos: modulos.value.map(modulo => ({
+        descricao: modulo.descricao,
+        documentacaoUrl: modulo.documentacaoUrl,
+        url: modulo.url,
+        porta: modulo.porta,
+        gitUrl: modulo.gitUrl,
+        tipoTecnologia: modulo.tipoTecnologia,
+        tecnologiaUuid: modulo.tecnologiaUuid,
+
+        armazenamentos: modulo.armazenamento?.map((armazenamento: any) => ({
+          schema: armazenamento.schema,
+          dblink: armazenamento.dblink,
+          bancoDeDadosUuid: armazenamento.bancoDeDadosUuid
+        })) || []
+      }))
+    }
+
+    await SistemaService.salvar(sistemaPayload)
+
     emit('save')
+
     descricao.value = ''
     versao.value = ''
     sigla.value = ''
     url.value = ''
     status.value = ''
     autenticacao.value = ''
-    segmentoSelecionado.value = ''
-    setorSelecionado.value = ''
-    areaDeNegocioSelecionado.value = ''
+    segmentoSelecionado.value = null
+    setorSelecionado.value = null
+    areaDeNegocioSelecionado.value = null
+    modulos.value = []
+    
     fechar()
+
   } catch (error) {
     console.error('Erro ao salvar sistema:', error)
     alert('Erro ao salvar sistema.')
