@@ -9,6 +9,8 @@ import { SetorService } from '@/services/SetorService'
 import { AreaDeNegocioService } from '@/services/AreaDeNegocioService'
 import type { Modulo } from '@/types/ModuloType'
 import ModuloForm from '@/components/Modulo/ModuloForm.vue'
+import type { Responsavel } from '@/types/ResponsavelType'
+import ResponsavelForm from '@/components/Responsavel/ResponsavelForm.vue'
 
 const descricao = ref('')
 const versao = ref('')
@@ -30,6 +32,23 @@ const emit = defineEmits<{
   (e: 'close'): void
   (e: 'save'): void
 }>()
+
+const responsavel = ref<Responsavel>({
+  uuid: '',
+  gestor: '',
+  solicitante: '',
+  responsavelTecnico: '',
+  emailGestor: '',
+  emailSolicitante: '',
+  ativo: true
+})
+
+const editarResponsavel = ref(false)
+
+function atualizarResponsavel(novo: Responsavel) {
+  responsavel.value = novo
+  editarResponsavel.value = false
+}
 
 function listarModulos(modulo: Modulo){
   modulos.value.push(modulo)
@@ -106,6 +125,8 @@ async function salvar() {
       segmentoUuid: segmentoSelecionado.value,
       setorUuid: setorSelecionado.value,
       areaDeNegocioUuid: areaDeNegocioSelecionado.value,
+
+      responsavel: responsavel.value,
 
       modulos: modulos.value.map(modulo => ({
         descricao: modulo.descricao,
@@ -261,6 +282,43 @@ onMounted(() => {
           </option>
         </select>
       </div>
+
+      <div class="col-span-3 border-t pt-4 mt-4">
+
+  <div class="flex justify-between items-center mb-3">
+
+    <h2 class="text-lg font-semibold">
+      Responsável
+    </h2>
+
+    <button
+      type="button"
+      @click="editarResponsavel = true"
+      class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+    >
+      Editar
+    </button>
+
+  </div>
+
+  <div class="text-sm text-gray-700 grid grid-cols-2 gap-2">
+
+    <div><b>Gestor:</b> {{ responsavel.gestor }}</div>
+    <div><b>Solicitante:</b> {{ responsavel.solicitante }}</div>
+    <div><b>Resp. Técnico:</b> {{ responsavel.responsavelTecnico }}</div>
+    <div><b>Email Gestor:</b> {{ responsavel.emailGestor }}</div>
+    <div><b>Email Solicitante:</b> {{ responsavel.emailSolicitante }}</div>
+
+  </div>
+
+  <ResponsavelForm
+    v-if="editarResponsavel"
+    :responsavel="responsavel"
+    @save="atualizarResponsavel"
+    @close="editarResponsavel = false"
+  />
+
+</div>
 
       <div class="col-span-1 md:col-span-2 lg:col-span-3 mt-4 border-t pt-4">
 
