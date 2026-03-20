@@ -128,7 +128,7 @@ async function salvar() {
 
       responsavel: responsavel.value,
 
-      modulos: modulos.value.map(modulo => ({
+      listaModulo: modulos.value.map(modulo => ({
         descricao: modulo.descricao,
         documentacaoUrl: modulo.documentacaoUrl,
         url: modulo.url,
