@@ -10,5 +10,6 @@ export interface Modulo {
     armazenamento: string[]; // lista de objeto
     tipoTecnologia: string;  //enum
     tecnologiaUuid: string;
+    tipoModulo: string;  //enum
     ativo: boolean;
 }

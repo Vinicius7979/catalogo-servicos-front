@@ -18,6 +18,7 @@ const tecnologiaSelecionada = ref<string | null>(null)
 const armazenamentoSelecionado = ref<string[]>([])
 const armazenamentos = ref<Armazenamento[]>([])
 const tecnologias = ref<Tecnologia[]>([])
+const tipoModulo = ref('')
 const mostrarArmazenamentoForm = ref(false)
 
 const emit = defineEmits<{
@@ -75,8 +76,8 @@ async function listarTecnologias() {
       descricao: tec.descricao,
       ativo: tec.ativo
     }))
-  } catch (err) {
-    console.error('Erro ao listar tecnologias:', err)
+  } catch (erro) {
+    console.error('Erro ao listar tecnologias:', erro)
     alert('Erro ao listar tecnologias.')
   }
 }
@@ -90,6 +91,7 @@ async function salvar() {
     porta: porta.value ?? 0,
     gitUrl: gitUrl.value,
     armazenamento: armazenamentoSelecionado.value,
+    tipoModulo: tipoModulo.value,
     tipoTecnologia: tipoTecnologia.value,
     tecnologiaUuid: tecnologiaSelecionada.value ?? '',
     ativo: true
@@ -178,6 +180,19 @@ onMounted(() => {
             <option value="BACKEND">Backend</option>
             <option value="FRONTEND">Frontend</option>
             <option value="MONOLITO">Monolito</option>
+          </select>
+        </div>
+
+        <div class="flex flex-col p-2">
+          <label class="block text-sm font-medium mb-2">Tipo do Módulo</label>
+          <select
+            v-model="tipoModulo"
+            class="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          >
+            <option disabled value="">--Selecione--</option>
+            <option value="API">API</option>
+            <option value="CRONJOB">CRONJOB</option>
+            <option value="SISTEMA_WEB">SISTEMA WEB</option>
           </select>
         </div>
 

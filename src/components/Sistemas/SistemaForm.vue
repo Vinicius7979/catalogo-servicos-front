@@ -134,31 +134,28 @@ async function salvar() {
         url: modulo.url,
         porta: modulo.porta,
         gitUrl: modulo.gitUrl,
+        tipoModulo: modulo.tipoModulo,
         tipoTecnologia: modulo.tipoTecnologia,
         tecnologiaUuid: modulo.tecnologiaUuid,
 
-        armazenamentos: modulo.armazenamento?.map((armazenamento: any) => ({
-          schema: armazenamento.schema,
-          dblink: armazenamento.dblink,
-          bancoDeDadosUuid: armazenamento.bancoDeDadosUuid
-        })) || []
+        listaArmazenamento: ( modulo.armazenamento ?? [] )
+          .filter((a: any) =>
+            a &&
+            a.schema &&
+            a.dblink &&
+            a.bancoDeDadosUuid
+          )
+          .map((a: any) => ({
+            schema: a.schema,
+            dblink: a.dblink,
+            bancoDeDadosUuid: a.bancoDeDadosUuid
+          }))
       }))
     }
 
     await SistemaService.salvar(sistemaPayload)
 
     emit('save')
-
-    descricao.value = ''
-    versao.value = ''
-    sigla.value = ''
-    url.value = ''
-    status.value = ''
-    autenticacao.value = ''
-    segmentoSelecionado.value = null
-    setorSelecionado.value = null
-    areaDeNegocioSelecionado.value = null
-    modulos.value = []
     
     fechar()
 
