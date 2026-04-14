@@ -3,7 +3,7 @@
 import { ref, onMounted } from 'vue'
 import { DeployService } from '@/services/DeployService'
 import DeployList from '@/components/Deploy/DeployList.vue'
-//import DeployForm from '@/components/Deploy/DeployForm.vue'
+import DeployForm from '@/components/Deploy/DeployForm.vue'
 //import DeployFormEdit from '@/components/Deploy/DeployFormEdit.vue'
 import ConfirmacaoRemocaoDeploy from '@/components/Deploy/ConfirmacaoRemocaoDeploy.vue'
 import type { Deploy } from '@/types/DeployType'
