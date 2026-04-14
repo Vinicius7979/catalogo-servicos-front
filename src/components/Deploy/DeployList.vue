@@ -12,12 +12,14 @@ defineProps<{
       <tr>
         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-neutral-500 uppercase tracking-wider">Versão</th>
         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-neutral-500 uppercase tracking-wider">Plataforma</th>
+        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-neutral-500 uppercase tracking-wider">Tipo de Pipeline</th>
       </tr>
     </thead>
     <tbody class="bg-white divide-y divide-neutral-100">
       <tr v-for="(dep, index) in deploys" :key="dep.uuid ?? (dep.versao + '-' + index)" class="hover:bg-neutral-50 transition">
         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-neutral-800">{{ dep.versao }}</td>
         <td class="px-6 py-4 whitespace-nowrap text-sm text-neutral-700">{{ dep.plataforma }}</td>
+        <td class="px-6 py-4 whitespace-nowrap text-sm text-neutral-700">{{ dep.tipoPipeline }}</td>
         <td class="px-6 py-4 whitespace-nowrap text-sm">
           <button 
             @click="$emit('editar', dep)"
