@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import { onMounted } from 'vue'
 import { DeployService } from '@/services/DeployService'
+import type { ServidorAplicacao } from '@/types/ServidorAplicacaoType'
+import type { Modulo } from '@/types/ModuloType'
+import { ServidorAplicacaoService } from '@/services/ServidorAplicacaoService'
 
 const versao = ref('')
 const hash = ref('')
@@ -8,11 +12,42 @@ const plataforma = ref('')
 const tipoPipeline = ref('')
 const servidorAplicacaoSelecionado = ref<string | null>(null)
 const moduloSelecionado = ref<string | null>(null)
+const servidores = ref<ServidorAplicacao[]>([])
+const modulos = ref<Modulo[]>([])
 
 const emit = defineEmits<{
   (e: 'close'): void
   (e: 'save'): void
 }>()
+
+async function listarServidoresAplicacao(){
+  try {
+    const { data } = await ServidorAplicacaoService.listar()
+    let itemsArray: ServidorAplicacao[] = []
+    itemsArray = data.dados;
+    if (Array.isArray(itemsArray) && itemsArray.length > 0 && Array.isArray(itemsArray[0])) {
+      itemsArray = itemsArray.flat()
+    }
+    servidores.value = (itemsArray).map((it: ServidorAplicacao) => ({
+      uuid: it.uuid,
+      descricao: it.descricao,
+      versao: it.versao,
+      ip: it.ip,
+      ambiente: it.ambiente,
+      tipoServidor: it.tipoServidor,
+      orquestrador: it.orquestrador,
+      url: it.url,
+      porta: it.porta,
+      ipProxy: it.ipProxy,
+      hostName: it.hostName,
+      distribuicao: it.distribuicao,
+      ativo: it.ativo,
+    }))
+  }catch (error) {
+    console.error('Erro ao listar servidores de aplicação:', error)
+    alert('Erro ao listar servidores de aplicação.')
+  }
+}
 
 async function salvar() {
   try {
@@ -32,6 +67,10 @@ async function salvar() {
 function fechar(){
   emit('close')
 }
+
+onMounted(() => {
+  listarServidoresAplicacao()
+})
 </script>
 
 <template>
@@ -79,6 +118,18 @@ function fechar(){
             <option disabled value="">--Selecione--</option>
             <option value="JENKINS">Jenkins</option>
             <option value="GITLAB_RUNNER">GitLab Runner</option>
+          </select>
+
+          <label class="block text-sm font-medium text-neutral-700 mb-2">Servidor de Aplicação:</label>
+          <select name="servidores" v-model="servidorAplicacaoSelecionado" class="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <option :value="null">--Selecione--</option>
+            <option v-for="(serv, index) in servidores" :key="serv.uuid ?? (serv.descricao + '-' + index)" :value="serv.uuid">{{ serv.descricao }} - {{ serv.versao }}</option>
+          </select>
+
+          <label class="block text-sm font-medium text-neutral-700 mb-2">Modulo:</label>
+          <select name="modulos" v-model="moduloSelecionado" class="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <option :value="null">--Selecione--</option>
+            <option v-for="(mod, index) in modulos" :key="mod.uuid ?? (mod.descricao + '-' + index)" :value="mod.uuid">{{ mod.descricao }} - {{ mod.porta }}</option>
           </select>
         </div>
 
