@@ -5,6 +5,7 @@ import { DeployService } from '@/services/DeployService'
 import type { ServidorAplicacao } from '@/types/ServidorAplicacaoType'
 import type { Modulo } from '@/types/ModuloType'
 import { ServidorAplicacaoService } from '@/services/ServidorAplicacaoService'
+import { ModuloService } from '@/services/ModuloService'
 
 const versao = ref('')
 const hash = ref('')
@@ -49,6 +50,33 @@ async function listarServidoresAplicacao(){
   }
 }
 
+async function listarModulos(){
+  try {
+    const { data } = await ModuloService.listar()
+    let itemsArray: Modulo[] = []
+    itemsArray = data.dados;
+    if (Array.isArray(itemsArray) && itemsArray.length > 0 && Array.isArray(itemsArray[0])) {
+      itemsArray = itemsArray.flat()
+    }
+    modulos.value = (itemsArray).map((it: Modulo) => ({
+      uuid: it.uuid,
+      descricao: it.descricao,
+      documentacaoUrl: it.documentacaoUrl,
+      url: it.url,
+      porta: it.porta,
+      gitUrl: it.gitUrl,
+      armazenamento: it.armazenamento,
+      tipoTecnologia: it.tipoTecnologia,
+      tecnologiaUuid: it.tecnologiaUuid,
+      tipoModulo: it.tipoModulo,
+      ativo: it.ativo,
+    }))
+  }catch (error) {
+    console.error('Erro ao listar módulos:', error)
+    alert('Erro ao listar módulos.')
+  }
+}
+
 async function salvar() {
   try {
     await DeployService.salvar({ versao: versao.value, hash: hash.value, plataforma: plataforma.value, tipoPipeline: tipoPipeline.value, servidorAplicacaoUuid: servidorAplicacaoSelecionado.value, moduloUuid: moduloSelecionado.value })
@@ -70,6 +98,10 @@ function fechar(){
 
 onMounted(() => {
   listarServidoresAplicacao()
+})
+
+onMounted(() => {
+  listarModulos()
 })
 </script>
 
