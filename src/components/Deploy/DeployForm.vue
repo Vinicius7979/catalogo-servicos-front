@@ -112,7 +112,7 @@ onMounted(() => {
           Cadastrar Deploy
         </h2>
         <div class="flex flex-col gap-4">
-          <label class="block text-sm font-medium text-neutral-700 mb-2">Deploy</label>
+          <label class="block text-sm font-medium text-neutral-700 mb-2">Versão</label>
           <input 
             v-model="versao" 
             type="text" 
