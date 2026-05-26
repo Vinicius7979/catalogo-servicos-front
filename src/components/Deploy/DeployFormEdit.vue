@@ -29,6 +29,8 @@ watch(() => props.deploy, (novo) => {
     hash.value = novo.hash ?? ''
     plataforma.value = novo.plataforma ?? ''
     tipoPipeline.value = novo.tipoPipeline ?? ''
+    servidorAplicacaoSelecionado.value = (novo.servidorAplicacaoUuid as string) ?? null
+    moduloSelecionado.value = (novo.moduloUuid as string) ?? null
   } else {
     versao.value = ''
     hash.value = ''
@@ -94,7 +96,7 @@ async function listarModulos(){
 async function salvarEdicao() {
   if (!props.deploy) return
   try {
-    await DeployService.atualizar(props.deploy.uuid, { versao: versao.value, hash: hash.value, plataforma: plataforma.value, tipoPipeline: tipoPipeline.value, servidorAplicacaoSelecionado: servidorAplicacaoSelecionado.value, moduloSelecionado: moduloSelecionado.value })
+    await DeployService.atualizar(props.deploy.uuid, { versao: versao.value, hash: hash.value, plataforma: plataforma.value, tipoPipeline: tipoPipeline.value, servidorAplicacaoUuid: servidorAplicacaoSelecionado.value, moduloUuid: moduloSelecionado.value })
     emit('save')
     emit('close')
   } catch (error) {
@@ -185,7 +187,7 @@ onMounted(() => {
           </button>
 
           <button
-            @click="salvar"
+            @click="salvarEdicao"
             class="px-4 py-2 rounded-lg bg-green-500 hover:bg-gray-400 transition"
           >
             Salvar
@@ -195,4 +197,4 @@ onMounted(() => {
     </div>
 </template>
 
-<style></style>
+<style scoped></style>
