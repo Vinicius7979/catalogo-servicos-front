@@ -95,13 +95,25 @@ async function listarModulos(){
 
 async function salvarEdicao() {
   if (!props.deploy) return
+
+  const payload = {
+    versao: versao.value,
+    hash: hash.value,
+    plataforma: plataforma.value,
+    tipoPipeline: tipoPipeline.value,
+    servidorAplicacaoUuid: servidorAplicacaoSelecionado.value,
+    moduloUuid: moduloSelecionado.value
+  }
+
+  console.log("UUID:", props.deploy.uuid)
+  console.log("Payload:", payload)
+
   try {
-    await DeployService.atualizar(props.deploy.uuid, { versao: versao.value, hash: hash.value, plataforma: plataforma.value, tipoPipeline: tipoPipeline.value, servidorAplicacaoUuid: servidorAplicacaoSelecionado.value, moduloUuid: moduloSelecionado.value })
+    await DeployService.atualizar(props.deploy.uuid, payload)
     emit('save')
     emit('close')
   } catch (error) {
-    console.error('Erro ao editar deploy:', error)
-    alert('Erro ao editar o deploy.')
+    console.error(error)
   }
 }
 
