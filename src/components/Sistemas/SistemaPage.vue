@@ -3,9 +3,9 @@ import { ref, onMounted } from 'vue'
 import { SistemaService } from '@/services/SistemaService'
 import SistemaList from '@/components/Sistemas/SistemaList.vue'
 import SistemaForm from '@/components/Sistemas/SistemaForm.vue'
-//import SistemaFormEdit from '@/components/Sistemas/LinguagemFormEdit.vue'
 import ConfirmacaoRemocaoSistema from '@/components/Sistemas/ConfirmacaoRemocaoSistema.vue'
 import type { Sistema } from '@/types/SistemaType'
+import SistemaFormEdit from '@/components/Sistemas/SistemaFormEdit.vue'
 
 const sistemas = ref<Sistema[]>([])
 const loading = ref(true)
@@ -56,19 +56,22 @@ async function carregarSistemas() {
 }
 
 function abrirEditar(sis: Sistema) {
+  console.log("sis:", sis)
+  console.log("responsavel:", sis.responsavel)
+
   sistemaSelecionado.value = sis
   editarForm.value = true
 }
 
-// function fecharEditar() {
-//   editarForm.value = false
-//   sistemaSelecionado.value = null
-// }
+function fecharEditar() {
+ editarForm.value = false
+ sistemaSelecionado.value = null
+}
 
-// function handleSaveEdit() {
-//   carregarSistemas()
-//   fecharEditar()
-// }
+function handleSaveEdit() {
+   carregarSistemas()
+   fecharEditar()
+}
 
 function abrirConfirmacaoRemocao(uuid: string) {
   uuidParaRemover.value = uuid
@@ -111,12 +114,12 @@ onMounted(() => {
       @save="carregarSistemas"
     />
 
-    <!-- <SistemaFormEdit 
+    <SistemaFormEdit 
       v-if="editarForm"
-      :linguagem="sistemaSelecionado"
+      :sistema="sistemaSelecionado"
       @close="fecharEditar"
-      @save="handleSaveEdit" 
-    /> -->
+      @save="handleSaveEdit"
+    />
 
     <ConfirmacaoRemocaoSistema
       v-if="mostrarConfirmacaoRemocao"
